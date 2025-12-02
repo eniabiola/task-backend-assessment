@@ -32,10 +32,6 @@ trait TestHelperTrait
         Artisan::call('db:seed', ['--class' => 'TaskStatusSeeder']);
     }
 
-    protected function createTaskNewStatus(array $attributes = []): TaskStatus
-    {
-        return TaskStatus::factory()->create();
-    }
 
     protected function createTask(array $attributes = []): Task
     {
@@ -52,7 +48,7 @@ trait TestHelperTrait
             'description' => $this->faker->sentence(20),
             'due_date' => $this->faker->dateTimeBetween('now', '+1 month'),
             'user_id' => $user->id,
-            'task_status_id' => TaskStatus::inRandomOrder()->first()->id,
+            'task_status' => "pending",
         ]);
         return compact('user', 'task');
     }
